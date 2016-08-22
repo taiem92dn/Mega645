@@ -1,0 +1,149 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'me.tatarka.retrolambda'
+
+def getDate() {
+    def date = new Date()
+    def formattedDate = date.format('yyyyMMdd')
+    return formattedDate
+}
+
+//def gitCommitCount = 100 + Integer.parseInt('git rev-list --count HEAD'.execute([], project.rootDir).text.trim())
+
+android {
+
+    signingConfigs {
+        release_key {
+            storeFile file("../keystore/dinosys_release_keystore.jks")
+            keyAlias 'DINOSYS_RELEASE_KEYSTORE'
+            keyPassword 'dino1234'
+            storePassword 'dino1234'
+        }
+        debug_key {
+            storeFile file("../keystore/dinosys_debug_keystore.jks")
+            keyAlias 'DINOSYS_DEBUG_KEYSTORE'
+            keyPassword 'dino.dev'
+            storePassword 'dino.dev'
+        }
+    }
+
+    compileSdkVersion 24
+    buildToolsVersion "24.0.1"
+
+    defaultConfig {
+        applicationId "vn.dinosys.mega645"
+        minSdkVersion 15
+        targetSdkVersion 24
+
+        archivesBaseName = "Mega645"
+        versionName "1.0"
+//        versionCode gitCommitCount
+        signingConfig signingConfigs.debug_key
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release_key
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug_key
+        }
+    }
+
+    applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            output.outputFile = new File(output.outputFile.parent, output.outputFile.name.
+                    replace(".apk", "_" + versionName + "_" + versionCode + "_" + getDate() + ".apk"));
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'META-INF/maven/com.google.guava/guava/pom.properties'
+        exclude 'META-INF/maven/com.google.guava/guava/pom.xml'
+    }
+    sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/'] } }
+}
+
+ext {
+    // Android Support AppCompat
+    supportLibVersion = '24.2.0'
+    // Butter Knife
+    butterknifeLibVersion = '8.1.0'
+    // Fonts Support
+    calligraphyLibVersion = '2.2.0'
+    // HTTP Connection
+    retrofit2LibVersion = '2.1.0'
+    okhttpLoggingInterceptorLibVersion = '3.3.1'
+    // Dependence Injection
+    daggerLibVersion = '2.5'
+    // Annotation & Reactive
+    rxAndroidLibVersion = '1.2.1'
+    rxJavaLibVersion = '1.1.6'
+    javaxAnnotationLibVersion = '1.0'
+    // Google Play Services
+    playServiceLibVersion = '9.4.0'
+    // Json
+    gsonLibVersion = '2.7'
+    // Image
+    glideLibVersion = '3.7.0'
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    testCompile 'junit:junit:4.12'
+    // Android Support AppCompat
+    compile "com.android.support:appcompat-v7:${supportLibVersion}"
+    compile "com.android.support:design:${supportLibVersion}"
+    compile "com.android.support:support-v4:${supportLibVersion}"
+    compile "com.android.support:cardview-v7:${supportLibVersion}"
+    compile "com.android.support:recyclerview-v7:${supportLibVersion}"
+    compile "com.android.support:preference-v14:${supportLibVersion}"
+    // Butter Knife
+    compile "com.jakewharton:butterknife:${butterknifeLibVersion}"
+    apt "com.jakewharton:butterknife-compiler:${butterknifeLibVersion}"
+    // Fonts Support
+    compile "uk.co.chrisjenx:calligraphy:${calligraphyLibVersion}"
+
+    // GreenDAO
+    compile 'de.greenrobot:greendao:2.1.0'
+
+    // Google Sign-In
+    compile "com.google.android.gms:play-services-auth:${playServiceLibVersion}"
+
+    // Dependence Injection
+    compile "com.google.dagger:dagger:${daggerLibVersion}"
+    apt "com.google.dagger:dagger-compiler:${daggerLibVersion}"
+    // Annotation & Reactive
+    compile "javax.annotation:jsr250-api:${javaxAnnotationLibVersion}"
+    compile "io.reactivex:rxandroid:${rxAndroidLibVersion}"
+    compile "io.reactivex:rxjava:${rxJavaLibVersion}"
+    // HTTP Connection
+    compile "com.squareup.retrofit2:retrofit:${retrofit2LibVersion}"
+    compile "com.squareup.retrofit2:converter-gson:${retrofit2LibVersion}"
+    compile "com.squareup.okhttp3:logging-interceptor:${okhttpLoggingInterceptorLibVersion}"
+    // Json
+    compile "com.google.code.gson:gson:${gsonLibVersion}"
+    // Utilities
+    compile "com.github.bumptech.glide:glide:${glideLibVersion}"
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+    // Facebook
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)' /*min sdk 15*/
+    // Pick Image
+    compile 'com.soundcloud.android:android-crop:1.0.1@aar'
+    // Open source licenses
+    compile 'de.psdev.licensesdialog:licensesdialog:1.8.1'
+}

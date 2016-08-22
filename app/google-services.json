@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "779231380855",
+    "project_id": "mega645-140808"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:779231380855:android:0e0fade482101797",
+        "android_client_info": {
+          "package_name": "vn.dinosys.mega645"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "779231380855-o0rgml4ip901id14qqqbjcqrcojfb0hl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "vn.dinosys.mega645",
+            "certificate_hash": "5E72423A6CE413C5AAD66273CCBEFA9E9B97A69D"
+          }
+        },
+        {
+          "client_id": "779231380855-3la1rvseutqkau3v7ecdse2pcqeokomr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyuuHBxK7OBhC36NHfnIRvT7E1y9rnbYw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
