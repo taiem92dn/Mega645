@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">Mega645</string>
+
+
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+
+    <string name="login">LOG IN</string>
+    <string name="authenticating">Authenticating &#8230;</string>
+
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="input_username">Please input username</string>
+    <string name="input_password">Please input password</string>
+    <string name="input_retype">Please input retype password</string>
+    <string name="retype_not_match">Retype password not match</string>
+
+    <string name="wrong_username_password">Wrong username or password</string>
+    <string name="connect_facebook">Connect with Facebook</string>
+    <string name="connect_google">Connect with Google</string>
+    <string name="create_account">Create Account</string>
+    <string name="forgot_password">Forgot Password</string>
+    <string name="title_activity_home">HomeActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+</resources>
